@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>The Dox</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="script.js"></script>
+	</head>
+	
+	<body ng-app="myApp" ng-controller="masterCtrl">
+		
+		<div class="container-fluid">
+		
+			<div class="row whitey" style="opacity: 0.8; border: 1px solid black;">
+				<div class="col-md-12">
+					<h1 class="text-center">Weather Watch</h1>
+				</div>
+			</div>
+			
+			<hr>
+			
+			<div class="row">
+			
+				<div class="col-md-3">
+					<div class="border search-div whitey">
+						<h3 class="text-center">Search a location!</h3>
+						<center>
+							<form id="weather-form">
+								<input type="text" id="city" placeholder="Enter City"/><br>
+								<input type="text" id="state" placeholder="Enter State"/><br>
+								<input type="submit" id="submit-btn" ng-click="loadWeather()"/>
+							</form>
+						</center>
+						<br>
+					</div>
+					
+					<div class="weather-info">
+						
+					</div>
+				</div>
+				
+				<div class="col-md-9">
+				<div class="contents border whitey">
+					<h1 class="text-center">Conditions</h1>
+					<div class="row weather-div">
+						<div class="col-md-2">
+							<!--<span id="icon-img" src=""></span>-->
+							<img src={{imgURL}} id="img-icon" alt="icon"/>
+						</div>
+						<div class="col-md-2">
+							<img src={{logoImg}} id="img-icon" alt="logo"/>
+						</div>
+						<div class="col-md-8">
+							<center><h3>{{location}} {{zip}} {{country}}</h3>
+							<h4>{{obsLocFull}}</h4>
+							<p>
+								<span><a href={{forecastURL}}>{{forcastText}}</a></span>
+								<span><a href={{historyURL}}>{{historyText}}</a></span>
+							</p></center>
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class=" row conditions-div">
+						<div class="col-md-4">
+							<p><b>Temperature:</b> {{temperatureString}}</p>
+							<p><b>Feels Like:</b> {{feelslike_string}}</p>
+							<p><b>Humidity:</b> {{humidity}}</p>
+							<p><b>Weather:</b> {{weather}}</p>
+							<p><b>Visibility (Kilometers):</b> {{visionKM}}</p>
+							<p><b>Visibility (Miles):</b> {{visionMI}}</p>
+							<p><b>Precipitation (Hour):</b> {{precipHourString}}</p>
+							<p><b>Precipitation (Day):</b> {{precipDayString}}</p>
+							<p><b>Wind:</b> {{windChill}} {{windString}}</p>
+						</div>
+						<div class="col-md-4">
+							<p><b>Weather UV:</b> {{uv}}</p>
+							<p><b>Dew Point:</b> {{dewpoint_string}}</p>
+							<p><b>Elevation:</b> {{elevation}}</p>
+							<p><b>WMO:</b> {{wmo}}</p>
+							<p><b>Pressure (in):</b> {{pressureIN}}</p>
+							<p><b>Pressure (mb):</b> {{pressureMB}}</p>
+							<p><b>Pressure Trend:</b> {{pressureTrend}}</p>
+							<p><b>Wind Degrees:</b> {{windDegrees}}</p>
+							<p><b>Wind Gust:</b> {{windGust}}</p>
+						</div>
+						<div class="col-md-4">
+							<p><b>Local Time:</b> {{local_time}}</p>
+							<p><b>Area:</b> {{local_tz_long}}</p>
+							<p><b>Observation Time:</b> {{obsTime}}</p>
+							<p><b>Station ID:</b> {{station}}</p>
+							<p><b>Observation Elevation:</b> {{obsLocElevation}}</p>
+						</div>
+					</div>
+					
+					<hr>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="text-center">Forecasts</h1>							
+						</div>
+						<div class="col-md-12">
+							<center><ul class="forecast-list">
+								<li ng-repeat="forecast in forCasts">
+									<p>{{forecast.day}}</p>
+									<img src={{forecast.img}}/>
+									<p>{{forecast.icon}}</p>
+									<p>{{forecast.message}}</p>
+									<p>Period: {{forecast.period}}</p>
+									<p>Pop: {{forecast.pop}}</p>
+								</li></center>
+							</ul>
+						</div>
+					</div>
+					
+					<hr>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<h1 class="text-center">Alerts</h1>
+							<p class="text-center">{{alertCount}}</p>
+							<p class="text-center">{{alertInfo}}</p>
+							<br>
+							<ul>
+								<li ng-repeat="alert in alerts">
+									<p><b>Date:</b> <br> {{alert.date}}</p>
+									<p><b>Description:</b> <br> {{alert.description}}</p>
+									<p><b>Message:</b> <br> {{alert.message}}</p>
+									<p><b>Expires:</b> <br> {{alert.expires}}</p>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<h1 class="text-center">Astronomy</h1>
+							<br>
+							<p><b>Sun Rise:</b> {{sunRise}}</p>
+							<p><b>Sun Set:</b> {{sunSet}}</p>
+							<br>
+							<p><b>Age of Moon:</b> {{moonAge}}</p>
+							<p><b>Moon Phase:</b> {{moonPhase}}</p>
+							<p><b>Current Time:</b> {{currentTime}}</p>
+							<p><b>Hemisphere:</b> {{hemisphere}}</p>
+							<p><b>Moon Rise:</b> {{moonRise}}</p>
+							<p><b>Moon Set:</b> {{moonSet}}</p>
+							<p><b>Percent Illuminated:</b> {{percentIlluminated}}</p>
+						</div>
+					</div>
+					
+					<hr>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="text-center">Satellite Images</h1><br>
+						</div>
+						<br>
+						<div class="col-md-6">
+							<center><img src={{imgOne}}/></center>
+						</div>
+						<div class="col-md-6">
+							<center><img src={{imgTwo}}/></center>
+						</div>
+					</div>
+					
+				</div>
+				
+				</div>
+			</div>
+		
+		</div>
+
+	</body>
+	
+</html>
