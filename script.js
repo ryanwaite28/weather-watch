@@ -23,12 +23,15 @@ App.controller('masterCtrl', function($scope) {
 		console.log(conditionsAPI);
 		
 		$.getJSON(conditionsAPI, function(data){
+			console.log(data);
 			
 			var weather = data.current_observation;
 			
 			var iconURL = data.current_observation.icon_url;
 			$('#img-icon').src = iconURL;
 			$('#icon-img').src = iconURL;
+			
+			
 			$scope.imgURL = iconURL;
 			
 			$scope.uv = weather.UV;
@@ -158,7 +161,8 @@ App.controller('masterCtrl', function($scope) {
 				
 				var forecastMessage = foreCast.fcttext;
 				var forecastIcon = foreCast.icon;
-				var forecastImg = foreCast.icon_url;
+				var forecastImg = foreCast.icon_url; 
+				console.log(forecastImg);
 				var forecastPeriod = foreCast.period;
 				var forecastPop = foreCast.pop;
 				var forecastDay = foreCast.title;
