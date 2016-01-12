@@ -10,6 +10,12 @@ App.controller('masterCtrl', function($scope) {
 	$scope.loadWeather = function() {
 		console.log('Loading Weather');
 		
+		
+		
+		var weatherTimeout = setTimeout(function() {
+			$('#message').text("Weather did not load successfully. Perhaps API has reached max usage or invalid search. Retry search or return in 24 hours.");
+		}, 4000);
+		
 		// User Inputs
 		var City = $('#city').val();
 		var State = $('#state').val();
@@ -36,7 +42,7 @@ App.controller('masterCtrl', function($scope) {
 			
 			$scope.uv = weather.UV;
 			$scope.dewpoint_string = weather.dewpoint_string;
-			$scope.location = weather.display_location.full;
+			$scope.location = weather.display_location.full; console.log($scope.location);
 			$scope.zip = weather.display_location.zip;
 			$scope.elevation = weather.display_location.elevation;
 			$scope.wmo = weather.display_location.wmo;
@@ -81,6 +87,10 @@ App.controller('masterCtrl', function($scope) {
 			$scope.$apply(function () {
 				console.log("Done");
 			});
+			
+			if($scope.location != '') {
+				clearTimeout(weatherTimeout);
+			}
 			
 		});
 		
