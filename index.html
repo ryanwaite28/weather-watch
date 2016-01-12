@@ -35,6 +35,7 @@
 								<input type="submit" id="submit-btn" ng-click="loadWeather()"/>
 							</form>
 						</center>
+						<p class="text-center" id="message" style="padding: 15px;"></p>
 						<br>
 					</div>
 					
@@ -136,18 +137,20 @@
 							</ul>
 						</div>
 						<div class="col-md-6">
-							<h1 class="text-center">Astronomy</h1>
-							<br>
-							<p><b>Sun Rise:</b> {{sunRise}}</p>
-							<p><b>Sun Set:</b> {{sunSet}}</p>
-							<br>
-							<p><b>Age of Moon:</b> {{moonAge}}</p>
-							<p><b>Moon Phase:</b> {{moonPhase}}</p>
-							<p><b>Current Time:</b> {{currentTime}}</p>
-							<p><b>Hemisphere:</b> {{hemisphere}}</p>
-							<p><b>Moon Rise:</b> {{moonRise}}</p>
-							<p><b>Moon Set:</b> {{moonSet}}</p>
-							<p><b>Percent Illuminated:</b> {{percentIlluminated}}</p>
+							<center>
+								<h1 class="text-center">Astronomy</h1>
+								<br>
+								<p><b>Sun Rise:</b> <br> {{sunRise}}</p>
+								<p><b>Sun Set:</b> <br> {{sunSet}}</p>
+								<br>
+								<p><b>Age of Moon:</b> <br> {{moonAge}}</p>
+								<p><b>Moon Phase:</b> <br> {{moonPhase}}</p>
+								<p><b>Current Time:</b> <br> {{currentTime}}</p>
+								<p><b>Hemisphere:</b> <br> {{hemisphere}}</p>
+								<p><b>Moon Rise:</b> <br> {{moonRise}}</p>
+								<p><b>Moon Set:</b> <br> {{moonSet}}</p>
+								<p><b>Percent Illuminated:</b> <br> {{percentIlluminated}}</p>
+							</center>
 						</div>
 					</div>
 					
@@ -160,15 +163,15 @@
 						<br>
 						<div class="col-md-4">
 							<p class="text-center">Static Image</p>
-							<center><img style="width: 80%; display: block; margin: auto;" src={{imgOne}}/></center>
+							<center><img alt="Static Image" style="width: 80%; display: block; margin: auto;" src={{imgOne}}/></center>
 						</div>
 						<div class="col-md-4">
 							<p class="text-center">Radar Image</p>
-							<center><img style="width: 80%; display: block; margin: auto;" src="{{motionRadar}}"/></center>
+							<center><img alt="Radar Image" style="width: 80%; display: block; margin: auto;" src="{{motionRadar}}"/></center>
 						</div>
 						<div class="col-md-4">
 							<p class="text-center">Satellite Image</p>
-							<center><img style="width: 80%; display: block; margin: auto;" src="{{motionSatellite}}"/></center>
+							<center><img alt="Satellite Image" style="width: 80%; display: block; margin: auto;" src="{{motionSatellite}}"/></center>
 						</div>
 					</div>
 					
