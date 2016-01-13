@@ -1,5 +1,17 @@
-// New
-// $scope. 
+var map;
+
+function initMap() {
+  // Create a map object and specify the DOM element for display.
+  map = new google.maps.Map(document.getElementById('map-div'), {
+    center: {lat: 39.173303, lng: -77.177274},
+    scrollwheel: true,
+    zoom: 6
+  });
+  
+  var infowindow = new google.maps.InfoWindow();
+  
+};
+
 
 // Main Angular Application
 var App = angular.module("myApp", []);
@@ -32,6 +44,32 @@ App.controller('masterCtrl', function($scope) {
 			console.log(data);
 			
 			var weather = data.current_observation;
+			
+			var latitude = weather.display_location.latitude;
+			var longitude = weather.display_location.longitude;
+			
+			map = new google.maps.Map(document.getElementById('map-div'), {
+				center: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				scrollwheel: true,
+				zoom: 8
+			});
+		
+			var marker = new google.maps.Marker({
+				map: map,
+				position: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				animation: google.maps.Animation.DROP,
+			});
+			
+			var infoBox = '<div>' + '<h3>' + 'Display Location' + '</h3>' + '<p>' + City + ', ' + State + '</p>' + '</div>';
+			
+			var infowindow = new google.maps.InfoWindow();
+			
+			google.maps.event.addListener(marker, 'click', function() {
+                console.log('click function working');
+                infowindow.setContent(infoBox);
+                map.setCenter(marker.position);
+                infowindow.open(map, marker);
+            });
 			
 			var iconURL = data.current_observation.icon_url;
 			$('#img-icon').src = iconURL;

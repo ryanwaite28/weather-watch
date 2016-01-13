@@ -10,6 +10,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSHPWjouiZzdAI_EhWkuuLsFMEGTgyYWE&callback=initMap"async defer></script>
 		<script src="script.js"></script>
 	</head>
 	
@@ -41,23 +42,29 @@
 						<br>
 					</div>
 					
-					<div class="weather-info">
-						
+					
+					<div class="map-container whitey">
+					
+						<div id="map-div" class="map-div">
+					
+						</div>
+					
 					</div>
+					
 				</div>
 				
 				<div class="col-md-9">
 				<div class="contents border whitey">
 					<h1 class="text-center">Conditions</h1>
 					<div class="row weather-div">
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<!--<span id="icon-img" src=""></span>-->
 							<img src={{imgURL}} id="img-icon" alt="icon"/>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<img src={{logoImg}} id="img-icon" alt="logo"/>
 						</div>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<center><h3>{{location}} {{zip}} {{country}}</h3>
 							<h4>{{obsLocFull}}</h4>
 							<p>
@@ -129,7 +136,7 @@
 							<p class="text-center">{{alertCount}}</p>
 							<p class="text-center">{{alertInfo}}</p>
 							<br>
-							<ul>
+							<ul class="alerts-list">
 								<li ng-repeat="alert in alerts">
 									<p><b>Date:</b> <br> {{alert.date}}</p>
 									<p><b>Description:</b> <br> {{alert.description}}</p>
