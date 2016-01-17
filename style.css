@@ -5,8 +5,9 @@
 }
 .contents {
 	height: 85vh;
-	overflow: scroll;
+	overflow-y: scroll;
 	opacity: 0.8;
+	margin-bottom: 20px;
 }
 
 .map-div {
