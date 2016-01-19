@@ -4,7 +4,7 @@ function initMap() {
   // Create a map object and specify the DOM element for display.
   map = new google.maps.Map(document.getElementById('map-div'), {
     center: {lat: 39.173303, lng: -77.177274},
-    scrollwheel: true,
+    scrollwheel: false,
     zoom: 6
   });
   
@@ -50,8 +50,8 @@ App.controller('masterCtrl', function($scope) {
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
 				center: {lat: parseInt(latitude), lng: parseInt(longitude)},
-				scrollwheel: true,
-				zoom: 8
+				scrollwheel: false,
+				zoom: 6
 			});
 		
 			var marker = new google.maps.Marker({
