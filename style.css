@@ -3,6 +3,9 @@
 .border {
 	border: 1px solid black;
 }
+hr {
+	border-color: black;
+}
 .contents {
 	/* height: 85vh; 
 	overflow-y: scroll; */
