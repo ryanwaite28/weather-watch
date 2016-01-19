@@ -4,8 +4,8 @@
 	border: 1px solid black;
 }
 .contents {
-	height: 85vh;
-	overflow-y: scroll;
+	/* height: 85vh;
+	overflow-y: scroll; */
 	opacity: 0.8;
 	margin-bottom: 20px;
 }
