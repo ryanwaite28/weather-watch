@@ -65,6 +65,15 @@ input {
 	margin-bottom: 10px;
 }
 
+.alerts-list {
+    padding: 0;
+    margin: 0;
+    display: block;
+    margin: auto;
+    max-height: 65vh;
+    overflow-y: scroll;
+}
+
 .alerts-list li {
 	border: 1px solid black;
 	margin-bottom: 15px;
