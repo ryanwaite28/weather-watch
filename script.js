@@ -251,7 +251,7 @@ App.controller('masterCtrl', function($scope) {
 		$scope.motionSatellite = 'http://api.wunderground.com/api/f44023fc37c557d4/animatedradar/animatedsatellite/q/' + State + '/' + City + '.gif?num=6&delay=50&interval=30';
 		
 		$('#message').text('Weather Loaded Successfully');
-		setTimeOut(function(){
+		setTimeout(function(){
 			$('#message').text('');
 		}, 4000)
 		
