@@ -250,6 +250,11 @@ App.controller('masterCtrl', function($scope) {
 		$scope.motionRadar = 'http://api.wunderground.com/api/f44023fc37c557d4/animatedradar/q/' + State + '/' + City + '.gif?newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50';
 		$scope.motionSatellite = 'http://api.wunderground.com/api/f44023fc37c557d4/animatedradar/animatedsatellite/q/' + State + '/' + City + '.gif?num=6&delay=50&interval=30';
 		
+		$('#message').text('Weather Loaded Successfully');
+		setTimeOut(function(){
+			$('#message').text('');
+		}, 4000)
+		
 		//var webCamAPI = 'http://api.wunderground.com/api/f44023fc37c557d4/webcams/q/' + State + '/' + City + '.json';
 	
 	
