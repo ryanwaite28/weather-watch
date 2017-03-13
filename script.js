@@ -31,10 +31,10 @@ App.controller('masterCtrl', function($scope) {
 		});
 	}
 
-	$scope.loadWeather = function(e, data) {
+	$scope.loadWeather = function(e, Data) {
 		console.log('Loading Weather...');
 		
-		var locale = data.results[0].formatted_address;
+		var locale = Data.results[0].formatted_address;
 		
 		var weatherTimeout = setTimeout(function() {
 			$('#message').text("Weather did not load successfully. Perhaps API has reached max usage or invalid search. Retry search or return in 24 hours.");
@@ -61,14 +61,14 @@ App.controller('masterCtrl', function($scope) {
 			var longitude = weather.display_location.longitude;
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
-				center: {lat: e.coords.latitude, lng: e.coords.latitudelongitude},
+				center: {lat: parseInt(e.coords.latitude), lng: parseInt(e.coords.longitude)},
 				scrollwheel: false,
 				zoom: 6
 			});
 		
 			var marker = new google.maps.Marker({
 				map: map,
-				position: {lat: e.coords.latitude, lng: e.coords.latitudelongitude},
+				position: {lat: parseInt(e.coords.latitude), lng: parseInt(e.coords.longitude)},
 				animation: google.maps.Animation.DROP,
 			});
 			
