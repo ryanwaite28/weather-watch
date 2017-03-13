@@ -57,18 +57,19 @@ App.controller('masterCtrl', function($scope) {
 			
 			var weather = data.current_observation;
 			
-			var latitude = Data.results[0].geometry.location.latitude;
-			var longitude = Data.results[0].geometry.location.longitude;
+			var lat = Data.results[0].geometry.location.latitude;
+			var lng = Data.results[0].geometry.location.longitude;
+			console.log('LatLng: ', lat, lng);
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
-				center: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				center: {lat: parseInt(lat), lng: parseInt(lng)},
 				scrollwheel: false,
 				zoom: 6
 			});
 		
 			var marker = new google.maps.Marker({
 				map: map,
-				position: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				position: {lat: parseInt(lat), lng: parseInt(lng)},
 				animation: google.maps.Animation.DROP,
 			});
 			
