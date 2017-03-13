@@ -18,6 +18,8 @@ var App = angular.module("myApp", []);
   
 // Master Angular Controller
 App.controller('masterCtrl', function($scope) {
+	
+	window.scope = $scope;
 
 	$scope.getGEO = function(){
 		navigator.geolocation.getCurrentPosition(function(e){
@@ -56,7 +58,7 @@ App.controller('masterCtrl', function($scope) {
 		console.log(conditionsAPI);
 		
 		$.getJSON(conditionsAPI, function(data){
-			console.log(data, Data);
+			console.log(data, Data, $scope);
 			
 			var weather = data.current_observation;
 			
