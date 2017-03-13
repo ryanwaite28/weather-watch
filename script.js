@@ -33,7 +33,7 @@ App.controller('masterCtrl', function($scope) {
 		var State = $('#state').val();
 		
 		
-		var streetViewURL = 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + City + '';
+		var streetViewURL = 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + State + '';
 		$('body').append('<img class="bgimg" src="' + streetViewURL + '">');
 		
 		// AJAX for Weather Conditions 
