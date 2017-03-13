@@ -18,11 +18,23 @@ var App = angular.module("myApp", []);
   
 // Master Angular Controller
 App.controller('masterCtrl', function($scope) {
-	
-	$scope.loadWeather = function() {
-		console.log('Loading Weather');
+
+	$scope.getGEO = function(){
+		navigator.geolocation.getCurrentPosition(function(e){
+			// console.log(e);
+			var latlng_string = e.coords.latitude + ',' + e.coords.longitude;
+			var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng_string + '&key=AIzaSyCSHPWjouiZzdAI_EhWkuuLsFMEGTgyYWE';
+			$.get(url, function(data){
+				// console.log(data);
+				$scope.loadWeather(e, data);
+			});
+		});
+	}
+
+	$scope.loadWeather = function(e, data) {
+		console.log('Loading Weather...');
 		
-		
+		var locale = data.results[0].formatted_address;
 		
 		var weatherTimeout = setTimeout(function() {
 			$('#message').text("Weather did not load successfully. Perhaps API has reached max usage or invalid search. Retry search or return in 24 hours.");
@@ -33,11 +45,11 @@ App.controller('masterCtrl', function($scope) {
 		var State = $('#state').val();
 		
 		
-		var streetViewURL = 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + City + '';
+		var streetViewURL = 'https://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + locale + '';
 		$('body').append('<img class="bgimg" src="' + streetViewURL + '">');
 		
 		// AJAX for Weather Conditions 
-		var conditionsAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/conditions/q/' + State + '/' + City + '.json';
+		var conditionsAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/conditions/q/' + locale + '.json';
 		console.log(conditionsAPI);
 		
 		$.getJSON(conditionsAPI, function(data){
@@ -49,18 +61,18 @@ App.controller('masterCtrl', function($scope) {
 			var longitude = weather.display_location.longitude;
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
-				center: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				center: {lat: e.coords.latitude, lng: e.coords.latitudelongitude},
 				scrollwheel: false,
 				zoom: 6
 			});
 		
 			var marker = new google.maps.Marker({
 				map: map,
-				position: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				position: {lat: e.coords.latitude, lng: e.coords.latitudelongitude},
 				animation: google.maps.Animation.DROP,
 			});
 			
-			var infoBox = '<div>' + '<h3>' + 'Display Location' + '</h3>' + '<p>' + City + ', ' + State + '</p>' + '</div>';
+			var infoBox = '<div>' + '<h3>' + 'Display Location' + '</h3>' + '<p>' + locale + '</p>' + '</div>';
 			
 			var infowindow = new google.maps.InfoWindow();
 			
@@ -133,7 +145,7 @@ App.controller('masterCtrl', function($scope) {
 		});
 		
 		// AJAX for Weather Alerts
-		var alertsAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/alerts/q/' + State + '/' + City + '.json';
+		var alertsAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/alerts/q/' + locale + '.json';
 		
 		$scope.alerts = [];
 		
@@ -175,7 +187,7 @@ App.controller('masterCtrl', function($scope) {
 		});
 		
 		// AJAX for Weather Astronomy
-		var astronomyAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/astronomy/q/' + State + '/' + City + '.json';
+		var astronomyAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/astronomy/q/' + locale + '.json';
 		
 		$.getJSON(astronomyAPI, function(data) {
 			console.log(data);
@@ -194,7 +206,7 @@ App.controller('masterCtrl', function($scope) {
 		});
 		
 		//AJAX for Weather ForeCasts
-		var foreCastAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/forecast/q/' + State + '/' + City + '.json';
+		var foreCastAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/forecast/q/' + locale + '.json';
 		
 		$.getJSON(foreCastAPI, function(data) {
 			console.log(data);
@@ -233,7 +245,7 @@ App.controller('masterCtrl', function($scope) {
 		});
 		
 		//AJAX for Weather Satellite Images
-		var satelliteAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/satellite/q/' + State + '/' + City + '.json';
+		var satelliteAPI = 'https://api.wunderground.com/api/f44023fc37c557d4/satellite/q/' + locale + '.json';
 		
 		$.getJSON(satelliteAPI, function(data) {
 			console.log(data);
@@ -247,8 +259,8 @@ App.controller('masterCtrl', function($scope) {
 			
 		});
 		
-		$scope.motionRadar = 'https://api.wunderground.com/api/f44023fc37c557d4/animatedradar/q/' + State + '/' + City + '.gif?newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50';
-		$scope.motionSatellite = 'https://api.wunderground.com/api/f44023fc37c557d4/animatedradar/animatedsatellite/q/' + State + '/' + City + '.gif?num=6&delay=50&interval=30';
+		$scope.motionRadar = 'https://api.wunderground.com/api/f44023fc37c557d4/animatedradar/q/' + locale + '.gif?newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50';
+		$scope.motionSatellite = 'https://api.wunderground.com/api/f44023fc37c557d4/animatedradar/animatedsatellite/q/' + locale + '.gif?num=6&delay=50&interval=30';
 		
 		//var webCamAPI = 'http://api.wunderground.com/api/f44023fc37c557d4/webcams/q/' + State + '/' + City + '.json';
 	
