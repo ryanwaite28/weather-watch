@@ -58,7 +58,7 @@ App.controller('masterCtrl', function($scope) {
 			var weather = data.current_observation;
 			
 			var latitude = Data.results[0].geometry.location.latitude;
-			var longitude = Data.results[0].geometry.location..longitude;
+			var longitude = Data.results[0].geometry.location.longitude;
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
 				center: {lat: parseInt(latitude), lng: parseInt(longitude)},
