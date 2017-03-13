@@ -26,6 +26,8 @@ App.controller('masterCtrl', function($scope) {
 			var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng_string + '&key=AIzaSyCSHPWjouiZzdAI_EhWkuuLsFMEGTgyYWE';
 			$.get(url, function(data){
 				// console.log(data);
+				$scope.Data = data;
+				$scope.$apply();
 				$scope.loadWeather(e, data);
 			});
 		});
@@ -33,6 +35,7 @@ App.controller('masterCtrl', function($scope) {
 
 	$scope.loadWeather = function(e, Data) {
 		console.log('Loading Weather...');
+		console.log(Data);
 		
 		var locale = Data.results[0].formatted_address;
 		
@@ -53,12 +56,12 @@ App.controller('masterCtrl', function($scope) {
 		console.log(conditionsAPI);
 		
 		$.getJSON(conditionsAPI, function(data){
-			console.log(data);
+			console.log(data, Data);
 			
 			var weather = data.current_observation;
 			
-			var lat = Data.results[0].geometry.location.latitude;
-			var lng = Data.results[0].geometry.location.longitude;
+			var lat = $scope.Data.results[0].geometry.location.latitude;
+			var lng = $scope.Data.results[0].geometry.location.longitude;
 			console.log('LatLng: ', lat, lng);
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
