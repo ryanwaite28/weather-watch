@@ -61,14 +61,14 @@ App.controller('masterCtrl', function($scope) {
 			var longitude = weather.display_location.longitude;
 			
 			map = new google.maps.Map(document.getElementById('map-div'), {
-				center: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				center: {lat: e.coords.latitude, lng: e.coords.latitudelongitude},
 				scrollwheel: false,
 				zoom: 6
 			});
 		
 			var marker = new google.maps.Marker({
 				map: map,
-				position: {lat: parseInt(latitude), lng: parseInt(longitude)},
+				position: {lat: e.coords.latitude, lng: e.coords.latitudelongitude},
 				animation: google.maps.Animation.DROP,
 			});
 			
